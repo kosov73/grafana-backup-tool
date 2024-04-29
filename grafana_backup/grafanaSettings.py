@@ -123,9 +123,11 @@ def main(config_path):
     if TOKEN:
         HTTP_GET_HEADERS = {'Authorization': 'Bearer ' + TOKEN}
         HTTP_POST_HEADERS = {'Authorization': 'Bearer ' + TOKEN, 'Content-Type': 'application/json'}
+        HTTP_POST_HEADERS_NOTIFICATION_POLICY = {'Authorization': 'Bearer ' + TOKEN, 'Content-Type': 'application/json', 'X-Disable-Provenance': 'true'}
     else:
         HTTP_GET_HEADERS = {}
         HTTP_POST_HEADERS = {'Content-Type': 'application/json'}
+        HTTP_POST_HEADERS_NOTIFICATION_POLICY = {'Content-Type': 'application/json', 'X-Disable-Provenance': 'true'}
 
     for k, v in EXTRA_HEADERS.items():
         HTTP_GET_HEADERS.update({k: v})

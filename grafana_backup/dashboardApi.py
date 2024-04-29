@@ -484,6 +484,13 @@ def search_notification_policies(grafana_url, http_get_headers, verify_ssl, clie
 def update_notification_policy(json_palyload, grafana_url, http_post_headers, verify_ssl, client_cert, debug):
     return send_grafana_put('{0}/api/v1/provisioning/policies'.format(grafana_url), json_palyload, http_post_headers, verify_ssl, client_cert, debug)
 
+def search_templates(grafana_url, http_get_headers, verify_ssl, client_cert, debug):
+    return send_grafana_get('{0}/api/v1/provisioning/templates'.format(grafana_url), http_get_headers, verify_ssl, client_cert, debug)
+
+
+def update_templates(json_palyload, grafana_url, http_post_headers, verify_ssl, client_cert, debug):
+    return send_grafana_put('{0}/api/v1/provisioning/templates'.format(grafana_url), json_palyload, http_post_headers, verify_ssl, client_cert, debug)
+
 
 def get_grafana_version(grafana_url, verify_ssl, http_get_headers):
     r = requests.get('{0}/api/health'.format(grafana_url),
