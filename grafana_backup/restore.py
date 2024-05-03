@@ -11,10 +11,10 @@ from grafana_backup.create_snapshot import main as create_snapshot
 from grafana_backup.create_annotation import main as create_annotation
 from grafana_backup.create_team import main as create_team
 from grafana_backup.create_team_member import main as create_team_member
+from grafana_backup.create_templates import main as create_templates
 from grafana_backup.create_library_element import main as create_library_element
 from grafana_backup.create_contact_point import main as create_contact_point
 from grafana_backup.update_notification_policy import main as update_notification_policy
-from grafana_backup.update_templates import main as update_templates
 from grafana_backup.s3_download import main as s3_download
 from grafana_backup.azure_storage_download import main as azure_storage_download
 from grafana_backup.gcs_download import main as gcs_download
@@ -100,7 +100,7 @@ def main(args, settings):
     restore_functions['contact_point'] = create_contact_point
     # There are some issues of notification policy restore api, it will lock the notification policy page and cannot be edited.
     restore_functions['notification_policys'] = update_notification_policy
-    restore_functions['templates'] = update_templates
+    restore_functions['templates'] = create_templates
 
     if sys.version_info >= (3,):
         with tempfile.TemporaryDirectory() as tmpdir:

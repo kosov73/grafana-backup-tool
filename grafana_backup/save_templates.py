@@ -42,13 +42,15 @@ def main(args, settings):
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
 
-
 def get_all_templates_in_grafana(grafana_url, http_get_headers, verify_ssl, client_cert, debug):
     (status, content) = search_templates(
         grafana_url, http_get_headers, verify_ssl, client_cert, debug)
     if status == 200:
         templates = content
-        print("templates found")
+        print("There are {0} templates: ".format(len(templates)))
+        for template in templates:
+            print("name: {0}, template: {1}".format(to_python2_and_3_compatible_string(
+                template['name']), to_python2_and_3_compatible_string(template['template'])))
         return templates
     else:
         print("query templates failed, status: {0}, msg: {1}".format(

@@ -5,7 +5,7 @@ from packaging import version
 
 def main(args, settings, file_path):
     grafana_url = settings.get('GRAFANA_URL')
-    http_post_headers = settings.get('HTTP_POST_HEADERS_NOTIFICATION_POLICY')
+    http_post_headers = settings.get('HTTP_POST_HEADERS')
     http_get_headers = settings.get('HTTP_GET_HEADERS')
     verify_ssl = settings.get('VERIFY_SSL')
     client_cert = settings.get('CLIENT_CERT')
@@ -22,7 +22,8 @@ def main(args, settings, file_path):
     if minimum_version <= grafana_version:
         with open(file_path, 'r') as f:
             data = f.read()
-
+        
+        http_post_headers['x-disable-provenance']='true'
         notification_policies = json.loads(data)
         result = update_notification_policy(json.dumps(
             notification_policies), grafana_url, http_post_headers, verify_ssl, client_cert, debug)
