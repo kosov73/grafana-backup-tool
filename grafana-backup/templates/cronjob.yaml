@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "grafana-backup.fullname" . }}
+  labels:
+    app: {{ include "grafana-backup.fullname" . }}
+spec:
+  schedule: "0 4 * * *"
+  jobTemplate:
+    metadata:
+      labels:
+        app: {{ include "grafana-backup.fullname" . }}
+    spec:
+      template:
+        spec:
+          restartPolicy: "Never"
+          containers:
+            - name: {{ include "grafana-backup.fullname" . }}
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              envFrom:
+                - configMapRef:
+                    name: {{ include "grafana-backup.fullname" . }}

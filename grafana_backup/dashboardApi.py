@@ -487,8 +487,8 @@ def update_notification_policy(json_palyload, grafana_url, http_post_headers, ve
 def search_templates(grafana_url, http_get_headers, verify_ssl, client_cert, debug):
     return send_grafana_get('{0}/api/v1/provisioning/templates'.format(grafana_url), http_get_headers, verify_ssl, client_cert, debug)
 
-def create_templates(json_palyload, grafana_url, http_post_headers, verify_ssl, client_cert, debug):
-    return send_grafana_post('{0}/api/v1/provisioning/templates'.format(grafana_url), json_palyload, http_post_headers, verify_ssl, client_cert, debug)
+def create_templates(name, json_palyload, grafana_url, http_post_headers, verify_ssl, client_cert, debug):
+    return send_grafana_put('{0}/api/v1/provisioning/templates/{1}'.format(grafana_url, name), json_palyload, http_post_headers, verify_ssl, client_cert, debug)
 
 def update_templates(name, json_palyload, grafana_url, http_post_headers, verify_ssl, client_cert, debug):
     return send_grafana_put('{0}/api/v1/provisioning/templates/{1}'.format(grafana_url, name), json_palyload, http_post_headers, verify_ssl, client_cert, debug)

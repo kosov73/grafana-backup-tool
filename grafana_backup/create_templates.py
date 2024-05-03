@@ -43,7 +43,7 @@ def main(args, settings, file_path):
                     print("[ERROR] Templates {0} failed to update. Return code:{1} - {2}".format(cp["name"], result[0], result[1]))
             else:
                 print("Templates {0} does not exist, creating".format(cp["name"]))
-                result = create_templates(json.dumps(cp), grafana_url, http_post_headers, verify_ssl, client_cert, debug)
+                result = create_templates(cp["name"], json.dumps(cp), grafana_url, http_post_headers, verify_ssl, client_cert, debug)
                 if result[0] == 202:
                     print("Successfully create templates")
                 else:

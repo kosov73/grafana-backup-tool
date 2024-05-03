@@ -1,0 +1,29 @@
+# Default values for grafana-backup.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: denis073/grafana-backup
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+env:
+  grafanaUrl: "https://grafana.url:443"
+  grafanaToken: "token"
+  S3URL: "https://storage.yandexcloud.net"
+  S3BucketName: "backet"
+  S3BucketKey: "folder"
+  S3Region: "us-east-1"
+  S3AccessKey: "accesskey"
+  S3SecretAccessKey: "secretaccesskey"
+    
+restore:
+  enabled: false
+  archiveFile: "202405031213.tar.gz"
